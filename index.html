@@ -83,7 +83,55 @@
 
       <label for="topic">
         Your topic
-      </label>
+      </label><!-- Your existing website content -->
+<!-- Topic input -->
+<!-- Start Speaking button -->
+<!-- Stop Speaking button -->
+<!-- Transcript area -->
+
+
+<!-- PASTE THE REVIEW CODE HERE -->
+<button id="reviewBtn" onclick="reviewSpeech()">
+    📊 Get My Review
+</button>
+
+<div id="reviewResult" class="review-result">
+    <h2>🎯 Your Speaking Review</h2>
+
+    <div class="result-item">
+        <span>Overall Score</span>
+        <strong id="overallScore">--</strong>
+    </div>
+
+    <div class="result-item">
+        <span>Words Spoken</span>
+        <strong id="reviewWords">--</strong>
+    </div>
+
+    <div class="result-item">
+        <span>Speaking Time</span>
+        <strong id="reviewTime">--</strong>
+    </div>
+
+    <div class="result-item">
+        <span>Fluency</span>
+        <strong id="fluencyResult">--</strong>
+    </div>
+
+    <div class="result-item">
+        <span>Vocabulary</span>
+        <strong id="vocabularyResult">--</strong>
+    </div>
+
+    <div class="result-item">
+        <span>Feedback</span>
+        <p id="reviewFeedback">Speak your topic and get your review.</p>
+    </div>
+</div>
+
+<!-- Keep your script connection at the very bottom -->
+<script src="script.js"></script>
+    </body>
 
       <input
         id="topic"
