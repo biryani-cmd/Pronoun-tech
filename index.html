@@ -84,7 +84,19 @@
       <label for="topic">
         Your topic
       </label><!-- Your existing website content -->
-<!-- Topic input -->
+<!-- Topic input --><button id="micBtn" onclick="startListening()">
+    🎤 Start Speaking
+</button>
+
+<button id="stopBtn" onclick="stopListening()">
+    ⏹️ Stop Speaking
+</button>
+
+<div id="transcript"></div>
+
+<button id="reviewBtn" onclick="reviewSpeech()">
+    📊 Get My Review
+</button>
 <!-- Start Speaking button -->
 <!-- Stop Speaking button -->
 <!-- Transcript area -->
