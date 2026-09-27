@@ -1085,3 +1085,102 @@ function escapeHtml(text) {
 // ================================
 
 renderHistory();
+function reviewSpeech() {
+    const text = finalText.trim();
+
+    if (!text) {
+        alert("🎤 Please speak something first.");
+        return;
+    }
+
+    const words = text.split(/\s+/).filter(Boolean);
+    const wordCount = words.length;
+
+    // Vocabulary estimate
+    const uniqueWords = new Set(
+        words.map(word => word.toLowerCase().replace(/[.,!?]/g, ""))
+    );
+
+    const vocabularyPercentage =
+        Math.round((uniqueWords.size / wordCount) * 100);
+
+    // Sentence analysis
+    const sentences = text
+        .split(/[.!?]+/)
+        .filter(sentence => sentence.trim().length > 0);
+
+    const averageSentenceLength =
+        sentences.length > 0
+            ? Math.round(wordCount / sentences.length)
+            : wordCount;
+
+    // Basic fluency score
+    let fluencyScore = 50;
+
+    if (wordCount >= 20) fluencyScore += 10;
+    if (wordCount >= 50) fluencyScore += 10;
+    if (wordCount >= 80) fluencyScore += 10;
+
+    if (averageSentenceLength >= 5) fluencyScore += 10;
+    if (averageSentenceLength >= 10) fluencyScore += 10;
+
+    fluencyScore = Math.min(fluencyScore, 100);
+
+    // Vocabulary score
+    let vocabularyScore = vocabularyPercentage;
+
+    if (vocabularyScore > 100) {
+        vocabularyScore = 100;
+    }
+
+    // Overall score
+    const overallScore = Math.round(
+        (fluencyScore + vocabularyScore) / 2
+    );
+
+    // Display results
+    $("#overallScore").textContent = overallScore + "/100";
+    $("#reviewWords").textContent = wordCount;
+    $("#reviewTime").textContent =
+        remaining !== undefined ? "Practice session" : "--";
+
+    $("#fluencyResult").textContent =
+        fluencyScore + "/100";
+
+    $("#vocabularyResult").textContent =
+        vocabularyScore + "/100";
+
+    // Feedback
+    let feedback = "";
+
+    if (wordCount < 20) {
+        feedback += "Try speaking for a little longer. ";
+    } else {
+        feedback += "Good speaking practice. ";
+    }
+
+    if (vocabularyScore < 40) {
+        feedback += "Try using more different words. ";
+    } else if (vocabularyScore < 60) {
+        feedback += "Your vocabulary variety is developing. ";
+    } else {
+        feedback += "Good variety of words. ";
+    }
+
+    if (averageSentenceLength < 5) {
+        feedback += "Try connecting your ideas into complete sentences.";
+    } else {
+        feedback += "Keep practicing clear and complete sentences.";
+    }
+
+    $("#reviewFeedback").textContent = feedback;
+
+    // Show result
+    $("#reviewResult").style.display = "block";
+
+    // Scroll to result
+    $("#reviewResult").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
